@@ -1,0 +1,11 @@
+{
+	"geode": "5.10.1",
+	"gd": { "win": "2.2081", "mac": "2.2081", "android": "2.2081", "ios": "2.2081" },
+	"version": "v1.0.0",
+	"id": "jeevin.mod-sync",
+	"name": "Mod Sync",
+	"developer": "Jeev1028",
+	"description": "Copy your mod list to another device (even an iPad) and re-download the correct build of each mod for that platform.",
+	"tags": ["utility"],
+	"links": { "source": "https://github.com/Jeev1028/geode-mod-sync" }
+}
