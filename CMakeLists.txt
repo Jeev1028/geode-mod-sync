@@ -20,10 +20,10 @@ endif()
 add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
 
 # Workaround for geode-sdk/bindings#1413: on iOS CI the bindings' forced unity
-# build (batch of 128) puts GeneratedSource.cpp in a batch without the Geode
-# headers -> "unknown type name 'FMOD_RESULT'". Turn unity off for that target.
+# build puts GeneratedSource.cpp in a TU without the Geode headers ->
+# "unknown type name 'FMOD_RESULT'". (Unity stays on; turning it off makes the
+# bindings compile as ~1900 separate files, far too slow.)
 if (GEODE_TARGET_PLATFORM STREQUAL "iOS" AND TARGET GeodeBindings)
-	set_target_properties(GeodeBindings PROPERTIES UNITY_BUILD OFF)
 	# GeneratedSource.cpp also lacks its own includes (FMOD_RESULT, FunctionType),
 	# so force the Geode bindings header into every TU of that target.
 	target_compile_options(GeodeBindings PRIVATE -include Geode/Bindings.hpp)
