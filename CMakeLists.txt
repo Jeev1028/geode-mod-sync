@@ -24,5 +24,9 @@ add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
 # headers -> "unknown type name 'FMOD_RESULT'". Turn unity off for that target.
 if (GEODE_TARGET_PLATFORM STREQUAL "iOS" AND TARGET GeodeBindings)
 	set_target_properties(GeodeBindings PROPERTIES UNITY_BUILD OFF)
+	# GeneratedSource.cpp also lacks its own includes (FMOD_RESULT, FunctionType),
+	# so force the Geode bindings header into every TU of that target.
+	target_compile_options(GeodeBindings PRIVATE -include Geode/Bindings.hpp)
 endif()
+
 setup_geode_mod(${PROJECT_NAME})
