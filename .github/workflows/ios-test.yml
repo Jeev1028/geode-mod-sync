@@ -1,0 +1,19 @@
+name: iOS bindings pin test
+
+on:
+  workflow_dispatch:
+    inputs:
+      bindings-ref:
+        description: geode-sdk/bindings commit or branch to build against
+        required: true
+
+jobs:
+  ios:
+    name: iOS @ ${{ inputs.bindings-ref }}
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: geode-sdk/build-geode-mod@main
+        with:
+          target: iOS
+          bindings-ref: ${{ inputs.bindings-ref }}
